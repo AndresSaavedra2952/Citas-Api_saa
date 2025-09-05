@@ -8,20 +8,30 @@ use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\EpsController;
 use App\Http\Controllers\ConsultorioController;
+use App\Http\Controllers\AuthController;
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 
 // PACIENTES
-Route::get('/pacientes', [PacienteController::class, 'index']);//°
-Route::post('/pacientes', [PacienteController::class, 'store']);//°
-Route::get('/pacientes/{id}', [PacienteController::class, 'show']);//°
-Route::put('/pacientes/{id}', [PacienteController::class, 'update']);//°
-Route::delete('/pacientes/{id}', [PacienteController::class, 'destroy']);//°
+Route::get('/pacientes', [PacienteController::class, 'index']); //°
+Route::post('/pacientes', [PacienteController::class, 'store']); //°
+Route::get('/pacientes/{id}', [PacienteController::class, 'show']); //°
+Route::put('/pacientes/{id}', [PacienteController::class, 'update']); //°
+Route::delete('/pacientes/{id}', [PacienteController::class, 'destroy']); //°
 
 // ESPECIALIDADES
-Route::get('/especialidades', [EspecialidadController::class, 'index']);//°
+Route::get('/especialidades', [EspecialidadController::class, 'index']); //°
 Route::post('/especialidades', [EspecialidadController::class, 'store']);   //° 
 Route::get('/especialidades/{id}', [EspecialidadController::class, 'show']); //° 
-Route::put('/especialidades/{id}', [EspecialidadController::class, 'update']);//° 
-Route::delete('/especialidades/{id}', [EspecialidadController::class, 'destroy']);//° 
+Route::put('/especialidades/{id}', [EspecialidadController::class, 'update']); //° 
+Route::delete('/especialidades/{id}', [EspecialidadController::class, 'destroy']); //° 
 
 // MÉDICOS
 Route::get('/medicos', [MedicoController::class, 'index']);
